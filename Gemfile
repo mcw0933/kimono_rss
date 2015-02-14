@@ -43,5 +43,8 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '~> 3.0'
+
+  # install rubocop through bundler
+  gem 'rubocop', require: false
 end
 
