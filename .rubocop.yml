@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+
+Metrics/LineLength:
+  Max: 120
