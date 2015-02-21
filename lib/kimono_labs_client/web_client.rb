@@ -15,7 +15,16 @@ module KimonoLabsClient
     # docs: https://www.kimonolabs.com/apidocs#ListApis
     def list
       response = @http.get uri('/kimonoapis', apikey: api_key)
-      response.body
+      JSON.parse(response.body)
+    end
+
+    # Gets a json document from the specified api.
+    # url format: https://www.kimonolabs.com/kimonoapis/{api_id}?apikey={api_key}
+    # docs: https://www.kimonolabs.com/apidocs#RetrieveApi
+    # FIXME: This is changing March 6 2015 - https://help.kimonolabs.com/hc/en-us/articles/203349480-Make-on-demand-API-calls-
+    def get(api_id)
+      response = @http.get uri("/kimonoapis/#{api_id}", apikey: api_key)
+      JSON.parse(response.body)
     end
 
     private

@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/vcr'
+require 'json'
 
 RSpec.describe KimonoLabsClient::WebClient do
   context 'initializing the web client' do
@@ -15,6 +16,20 @@ RSpec.describe KimonoLabsClient::WebClient do
     it 'lists available apis for the api key' do
       VCR.use_cassette('kimonolabs_api_list', record: :new_episodes) do
         expect(subject.list).to_not be_empty
+      end
+    end
+  end
+
+  context 'given a non-empty api list' do
+    let(:api_key) { ENV.fetch('KIMONO_API_KEY', anything) }
+    subject { described_class.new(api_key: api_key) }
+
+    let(:list) { subject.list['data'] }
+
+    it 'gets the response from a single api' do
+      VCR.use_cassette('kimonolabs_api_get', record: :new_episodes) do
+        expect(list).to_not be_empty
+        expect(subject.get(list.first['id'])).to_not be_empty
       end
     end
   end
