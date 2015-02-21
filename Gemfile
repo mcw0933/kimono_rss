@@ -48,10 +48,10 @@ group :development, :test do
   # install rubocop through bundler
   gem 'rubocop', require: false
 
-  gem 'dotenv-rails'
-
   gem 'pry-rails'
 
   gem 'webmock'
   gem 'vcr'
+
+  gem 'dotenv-rails', require: false
 end

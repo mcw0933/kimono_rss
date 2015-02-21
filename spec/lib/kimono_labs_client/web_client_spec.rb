@@ -11,25 +11,18 @@ RSpec.describe KimonoLabsClient::WebClient do
 
   context 'given an api key' do
     let(:api_key) { ENV.fetch('KIMONO_API_KEY', anything) }
+    let(:api_id) { 'ascnmvou' } # hard-coded, in order to get VCR cassettes to work
     subject { described_class.new(api_key: api_key) }
 
     it 'lists available apis for the api key' do
-      VCR.use_cassette('kimonolabs_api_list', record: :new_episodes) do
+      VCR.use_cassette('kimonolabs_api_list') do
         expect(subject.list).to_not be_empty
       end
     end
-  end
-
-  context 'given a non-empty api list' do
-    let(:api_key) { ENV.fetch('KIMONO_API_KEY', anything) }
-    subject { described_class.new(api_key: api_key) }
-
-    let(:list) { subject.list['data'] }
 
     it 'gets the response from a single api' do
-      VCR.use_cassette('kimonolabs_api_get', record: :new_episodes) do
-        expect(list).to_not be_empty
-        expect(subject.get(list.first['id'])).to_not be_empty
+      VCR.use_cassette('kimonolabs_api_get') do
+        expect(subject.get(api_id)).to_not be_empty
       end
     end
   end

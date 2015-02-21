@@ -39,7 +39,7 @@ module KimonoLabsClient
 
     def uri(path = '', query_hash = {})
       uri = URI('https://www.kimonolabs.com')
-      uri.path = path
+      uri.path = URI.escape(path)
       uri.query = Hash(query_hash).to_query
 
       uri
