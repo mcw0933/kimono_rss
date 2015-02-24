@@ -2,6 +2,11 @@ language: ruby
 rvm:
   - 2.2.0
 
-# Docker Infrastructure
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database kimono_rss_test;' -U postgres
+
+# Use Docker infrastructure
 sudo: false
 cache: bundler
