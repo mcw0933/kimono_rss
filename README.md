@@ -2,6 +2,12 @@
 
 KimonoRSS is a tool for easily consuming JSON APIs from [KimonoLabs](https://www.kimonolabs.com) either in a ruby environment or as an RSS feed of entry history.
 
+## Developing
+
+You will need Postgres 9.3 or higher.  [Get Postgres.app](http://postgresapp.com/) and then use [the guide](http://postgresapp.com/documentation/cli-tools.html) to get set up.
+
+Then clone the repo, `bundle install`, `rake db:create db:migrate` and you're all set!
+
 ## Debugging
 
 KimonoRSS uses the `pry` gem as a console - you can easily debug by calling `binding.pry` anywhere you would like to launch a pry REPL.
