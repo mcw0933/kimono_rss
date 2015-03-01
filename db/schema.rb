@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20150301002345) do
 
   add_index "endpoints", ["kimono_id"], name: "index_endpoints_on_kimono_id", unique: true, using: :btree
 
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "endpoint_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "schemas", force: :cascade do |t|
     t.integer   "endpoint_id", null: false
     t.tstzrange "effective",   null: false
