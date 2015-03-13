@@ -4,10 +4,14 @@ RSpec.describe Schema, type: :model do
   context 'when created' do
     subject { described_class.new }
 
-    it 'must have an endpoint and a structure' do
-      expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid)
+    it 'must have an endpoint' do
       subject.structure = '{ "field": "value" }'
       expect { subject.save! }.to raise_error(ActiveRecord::StatementInvalid)
+    end
+
+    it 'must have a non-nil structure' do
+      subject.structure = nil
+      expect { subject.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'must have a non-empty structure' do
