@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225235601) do
+ActiveRecord::Schema.define(version: 20150301004841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,5 +24,26 @@ ActiveRecord::Schema.define(version: 20150225235601) do
   end
 
   add_index "endpoints", ["kimono_id"], name: "index_endpoints_on_kimono_id", unique: true, using: :btree
+
+  create_table "entries", force: :cascade do |t|
+    t.integer  "feed_id",    null: false
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "endpoint_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "schemas", force: :cascade do |t|
+    t.integer   "endpoint_id", null: false
+    t.tstzrange "effective",   null: false
+    t.json      "structure",   null: false
+    t.datetime  "created_at",  null: false
+    t.datetime  "updated_at",  null: false
+  end
 
 end
