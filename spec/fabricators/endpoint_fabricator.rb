@@ -1,3 +1,3 @@
 Fabricator(:endpoint) do
-  kimono_id { Faker::Lorem.characters(8) }
+  kimono_id { 'ascnmvou' } # hard-coded, in order to get VCR cassettes to work
 end
