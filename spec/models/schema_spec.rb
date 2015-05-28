@@ -20,7 +20,7 @@ RSpec.describe Schema, type: :model do
     end
 
     it 'is effective for the indefinite future' do
-      expect(subject.effective).to cover(DateTime.now)
+      expect(subject.effective).to cover(Time.zone.now)
       expect(subject.effective).to cover(10_000.years.from_now)
     end
   end

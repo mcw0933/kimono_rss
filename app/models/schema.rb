@@ -15,6 +15,6 @@ class Schema < ActiveRecord::Base
   # ArgumentError: bad value for range
   # from ... gems/activerecord-4.2.0/lib/active_record/connection_adapters/postgresql/oid/range.rb:39:in `initialize'
   def default_values
-    self.effective ||= DateTime.new(1, 1, 1)..DateTime::Infinity.new
+    self.effective ||= Time.zone.local(1, 1, 1)..DateTime::Infinity.new
   end
 end
